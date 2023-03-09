@@ -1,0 +1,40 @@
+@startuml "TechSöz Class Diagram"
+
+class Creator{
+    + name : string
+    + createdTerms : [SourceTerm]
+    + suggestedTerms : [DestinationTerm]
+    + votedTerms : [DestinationTerm]
+    + createNewTerm()
+    + suggestNewTerm()
+    + vote()
+}
+
+class Member{
+    + name :string
+    + suggestedTerms:[DestinationTerm]
+    + votedTerms:[DestinationTerm]
+    + suggestNewTerm()
+    + vote()
+}
+
+class SourceTerm{
+    + description : string
+    + creator : Creator
+    + destinationTerms :[DestinationTerm]
+}
+
+class DestinationTerm{
+    + description : string
+    + sourceTerm : SourceTerm
+    + memberSuggested : Member
+    + membersVoted : [Member]
+    + votes : number
+}
+
+Creator -up-|> Member
+Creator "1" o--> "n" SourceTerm
+Member "1" o--> "n" DestinationTerm
+SourceTerm "1" *-right-> "n" DestinationTerm
+ 
+@enduml

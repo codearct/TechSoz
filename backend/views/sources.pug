@@ -1,0 +1,9 @@
+extends layout
+block content 
+        
+    h2 Toplam kaynak kelime sayısı #{sources.length}.
+
+    ol
+        each source in sources  
+            li 
+                a(href =`/sources/${source._id}`)=source.description

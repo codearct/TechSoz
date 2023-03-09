@@ -1,0 +1,12 @@
+extends layout
+block content 
+        
+    h2 #{source.description} 
+    p #{source.creator.name} tarafından yaratıldı
+
+    ol 
+        each destTerm in source.destinationTerms
+            li  
+                h3 #{destTerm.description} 
+                p öneren : #{destTerm.memberSuggested.name}
+                p oy sayısı : #{destTerm.membersVoted.length}              

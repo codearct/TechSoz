@@ -26,8 +26,10 @@ export default createStore({
       return request.data;
     },
     async addCreator() {
-      const request = await axios.post("/creators");
-      if (request) return "TechSöz'e Hoşgeldiniz.";
+      const response = await axios.get("/auth/login/success", {
+        withCredentials: true,
+      });
+      return response.data.message;
     },
     async addMember() {
       const response = await axios.get("/auth/login/success", {

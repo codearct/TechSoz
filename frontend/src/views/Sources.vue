@@ -14,13 +14,13 @@ export default {
     };
   },
   async mounted() {
-    const message = await this.addMember();
+    const message = await this.addCreator();
     if (message) alert(message);
     this.sources = await this.getSources();
     this.isLoading = false;
   },
   methods: {
-    ...mapActions(["getSources", "addMember"]),
+    ...mapActions(["getSources", "addCreator"]),
   },
   computed: {
     ...mapState(["letter"]),

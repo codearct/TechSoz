@@ -36,6 +36,19 @@ router.get(
   passport.authenticate("google", { scope: ["profil", "email"] })
 );
 
+router.get(
+  "/github/callback",
+  passport.authenticate("github", {
+    successRedirect: `${process.env.CLIENT_URL}sources`,
+    failureRedirect: "/login/failed",
+  })
+);
+
+router.get(
+  "/github",
+  passport.authenticate("github", { scope: ["profil", "email"] })
+);
+
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect(process.env.CLIENT_URL);

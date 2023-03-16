@@ -6,8 +6,10 @@ export default {
   methods: {
     ...mapActions(["addCreator", "addMember"]),
     async signUpAsCreator() {
-      const message = await this.addCreator();
-      if (message) alert(message);
+      window.open(
+        `${process.env.VUE_APP_API_URL}/auth/github/callback`,
+        "_self"
+      );
     },
     async signUpAsMember() {
       window.open(

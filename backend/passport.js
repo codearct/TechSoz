@@ -1,5 +1,6 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const { memberService } = require("./services");
+const GithubStrategy = require("passport-github2").Strategy;
+const { memberService, creatorService } = require("./services");
 
 module.exports = (passport) => {
   passport.use(
@@ -29,6 +30,35 @@ module.exports = (passport) => {
       }
     )
   );
+
+  passport.use(
+    new GithubStrategy(
+      {
+        clientID: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        callbackURL: "/auth/github/callback",
+        scope: ["profile", "email"],
+      },
+      async (accesToken, refreshToken, profile, done) => {
+        const newCreator = {
+          externalId: profile.id,
+          email: profile.username,
+        };
+        try {
+          let creator = await creatorService.findBy("externalId", profile.id);
+          if (creator.length > 0) {
+            done(null, creator);
+          } else {
+            creator = await creatorService.insert(newCreator);
+            done(null, creator);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    )
+  );
+
   passport.serializeUser((externalId, done) => {
     done(null, externalId);
   });

@@ -1,12 +1,12 @@
 <script>
 import TsContainer from "@/components/ui/TsContainer.vue";
 import TsText from "@/components/ui/TsText.vue";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "MainHeader",
   data() {
     return {
-      isLogin: false,
+      userName: "",
     };
   },
   components: {
@@ -14,10 +14,10 @@ export default {
     TsText,
   },
   methods: {
-    ...mapActions(["setLetter"]),
-    sendLetter() {
-      this.setLetter("a");
-    },
+    ...mapActions(["setLetter", "logOut"]),
+  },
+  computed: {
+    ...mapState(["isLogin", "user"]),
   },
 };
 </script>
@@ -25,14 +25,12 @@ export default {
 <template lang="pug">
 header.header 
     TsContainer.header-inner
-        router-link(to="/sources" class="logo" @click="sendLetter()") TechSöz
+        router-link(to="/sources" class="logo" @click="setLetter('a')") TechSöz
         form.search
             input(type="text" placeholder="sözcük ara")
         nav.navigation
-            TsText(v-if="isLogin") mayarch
-            router-link(to="/signup" v-else) 
-              TsText kayıt ol
-            router-link(to="/sources" v-if="isLogin") 
+            TsText(v-if="isLogin") {{user.name.toLowerCase()}}
+            router-link(@click="logOut()" v-if="isLogin" to="/") 
               TsText çıkış yap
             router-link(to="/login" v-else) 
               TsText giriş yap

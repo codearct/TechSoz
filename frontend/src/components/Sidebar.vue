@@ -10,17 +10,13 @@ export default {
   data() {
     return {
       letters: "abcdefghijklmnopqrstuvwxyz",
-      isCreatorLoggedIn: true,
     };
   },
   methods: {
     ...mapActions(["setLetter"]),
-    sendLetter(crntLetter) {
-      this.setLetter(crntLetter);
-    },
   },
   computed: {
-    ...mapState(["letter"]),
+    ...mapState(["letter", "isCreator"]),
   },
 };
 </script>
@@ -28,18 +24,18 @@ export default {
 <template lang="pug">
 .letters
     ul
-      li(v-if="isCreatorLoggedIn")
+      li(v-if="isCreator")
         TsButton(v-if="letter==crntLetter"
                 toLink="/sources/create" 
-                @onClick="sendLetter()" btnClass="btnActive") +
+                @onClick="setLetter()" btnClass="btnActive") +
         TsButton(v-else toLink="/sources/create" 
-                @onClick="sendLetter()") +  
+                @onClick="setLetter()") +  
       li(v-for="crntLetter in Array.from(letters)")
         TsButton(v-if="letter==crntLetter"
                 toLink="/sources" 
-                @onClick="sendLetter(crntLetter)" btnClass="btnActive") {{crntLetter}}
+                @onClick="setLetter(crntLetter)" btnClass="btnActive") {{crntLetter}}
         TsButton(v-else toLink="/sources" 
-                @onClick="sendLetter(crntLetter)") {{crntLetter}} 
+                @onClick="setLetter(crntLetter)") {{crntLetter}} 
 </template>
 
 <style scoped lang="postcss">

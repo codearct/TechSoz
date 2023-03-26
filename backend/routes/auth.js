@@ -11,7 +11,7 @@ router.get("/login/success", (req, res) => {
   } else {
     res.status(403).json({
       error: true,
-      message: "Yetkiniz Yok!!!",
+      message: "Giriş Başarısız!!!",
     });
   }
 });
@@ -49,8 +49,10 @@ router.get(
   passport.authenticate("github", { scope: ["profil", "email"] })
 );
 
-router.get("/logout", (req, res) => {
-  req.logout();
+router.get("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) return next(err);
+  });
   res.redirect(process.env.CLIENT_URL);
 });
 

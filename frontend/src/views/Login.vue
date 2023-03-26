@@ -2,16 +2,16 @@
 import { mapActions } from "vuex";
 
 export default {
-  name: "SignUpView",
+  name: "LoginView",
   methods: {
     ...mapActions(["addCreator", "addMember"]),
-    async signUpAsCreator() {
+    async loginAsCreator() {
       window.open(
         `${process.env.VUE_APP_API_URL}/auth/github/callback`,
         "_self"
       );
     },
-    async signUpAsMember() {
+    async loginAsMember() {
       window.open(
         `${process.env.VUE_APP_API_URL}/auth/google/callback`,
         "_self"
@@ -24,7 +24,7 @@ export default {
 <template lang="pug"> 
 .signUp
   .signUpWithGithub
-    button(@click="signUpAsCreator") Github Kayıt 
+    button(@click="loginAsCreator") Github  
   .signUpWithGoogle
-    button(@click="signUpAsMember") Google Kayıt
+    button(@click="loginAsMember") Google 
 </template>

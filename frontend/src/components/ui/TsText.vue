@@ -6,7 +6,7 @@ export default {
       default: "span",
     },
     size: {
-      default: "normal",
+      default: "small",
       validator: function (value) {
         return ["normal", "small", "xsmall", "xxsmall"].indexOf(value) !== -1;
       },

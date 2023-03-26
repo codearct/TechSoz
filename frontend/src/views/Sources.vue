@@ -14,13 +14,11 @@ export default {
     };
   },
   async mounted() {
-    const message = await this.addCreator();
-    if (message) alert(message);
     this.sources = await this.getSources();
     this.isLoading = false;
   },
   methods: {
-    ...mapActions(["getSources", "addCreator"]),
+    ...mapActions(["getSources"]),
   },
   computed: {
     ...mapState(["letter"]),
@@ -33,7 +31,6 @@ export default {
 h1 Kaynak Kelimeler {{letter}}
   p(v-if="isLoading") Yükleniyor... 
   h2(v-else) Toplam kaynak kelime sayısı {{sources.length}}.
-
     ol 
       li(v-for="source in sources")
         a(:href ="`/sources/${source._id}`") {{source.description}}

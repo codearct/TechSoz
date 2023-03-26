@@ -2,6 +2,7 @@
 import MainHeader from "@/components/Header.vue";
 import TsContainer from "@/components/ui/TsContainer.vue";
 import TsSidebar from "@/components/Sidebar.vue";
+import { mapActions } from "vuex";
 
 export default {
   name: "app",
@@ -9,6 +10,13 @@ export default {
     MainHeader,
     TsContainer,
     TsSidebar,
+  },
+  async mounted() {
+    const response = await this.getUser();
+    if (response.error) alert(response.message);
+  },
+  methods: {
+    ...mapActions(["getUser"]),
   },
 };
 </script>

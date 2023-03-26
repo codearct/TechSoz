@@ -5,9 +5,16 @@ const MemberSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  email: {
+  name: {
     type: String,
     require: true,
+  },
+  email: {
+    type: String,
+  },
+  createdDate: {
+    type: Date,
+    default: Date.now,
   },
   suggestedTerms: [
     {

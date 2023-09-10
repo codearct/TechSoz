@@ -26,7 +26,7 @@ router.get("/login/failed", (req, res) => {
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: `${process.env.CLIENT_URL}sources`,
+    successRedirect: `${process.env.CLIENT_URL}/sources`,
     failureRedirect: "/login/failed",
   })
 );
@@ -39,7 +39,7 @@ router.get(
 router.get(
   "/github/callback",
   passport.authenticate("github", {
-    successRedirect: `${process.env.CLIENT_URL}sources`,
+    successRedirect: `${process.env.CLIENT_URL}/sources`,
     failureRedirect: "/login/failed",
   })
 );

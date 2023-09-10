@@ -39,5 +39,8 @@ main.main
     height: 100%;
     align-items: center;
   }
+  .mainbar {
+    height: 100vh;
+  }
 }
 </style>

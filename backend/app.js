@@ -22,7 +22,7 @@ app.set("view engine", "pug");
 
 app.use(
   session({
-    secret: "keyboard cat",
+    secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: false,
     // cookie: { secure: true },
@@ -35,7 +35,7 @@ app.use(passport.session());
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "http://localhost:8080",
+    origin: process.env.CLIENT_URL,
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })

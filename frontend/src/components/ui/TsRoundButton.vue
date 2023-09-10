@@ -1,7 +1,7 @@
 <script>
 import TsText from "@/components/ui/TsText.vue";
 export default {
-  name: "TsButton",
+  name: "TsRoundButton",
   props: {
     toLink: {
       default: "",
